@@ -1,0 +1,64 @@
+<div
+  *ngIf="dataLoaded == false"
+  class="spinner-border text-primary"
+  role="status"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="mb-3">
+  <!-- ürün arama yeri-->
+  <label for="filterText" class="form-label">Ürün ara</label>
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    <!--
+    banana
+    rotation
+    componenteki
+    filterText
+    ile
+    bağlıyoruz--
+  />
+  class="form-control" id="filterText" placeholder="arama ifadesi giriniz" />
+</div>
+<div *ngIf="filterText.length > 2" class="alert alert-success">
+  {{ filterText }} aradınız.
+</div>
+
+<table *ngIf="dataLoaded == true" class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Ürün adı</th>
+      <th>Kategori</th>
+      <th>Fiyat</th>
+      <th>Kdv'li Fiyat</th>
+      <th>Stok Adedi</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- tbody  içinde olması gerekiyor bazı şeyler için-->
+    <tr *ngFor="let product of products | filterPipe: filterText">
+      <!-- filtreyi listenin kendisine uygularız-->
+      <td>{{ product.productId }}</td>
+      <td>{{ product.productName | uppercase }}</td>
+      <!-- | pipe işareti uppercase pipe-->
+      <td>{{ product.categoryId }}</td>
+      <td>{{ product.unitPrice | currency }}</td>
+      <td>{{ product.unitPrice | vatAdded: 18 | currency }}</td>
+      <!-- vatded bir pipe-->
+      <td>{{ product.unitsInStock }}</td>
+      <td>
+        <button
+          (click)="addToCart(product)"
+          type="button"
+          class="btn btn-success"
+        >
+          Sepete ekle
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

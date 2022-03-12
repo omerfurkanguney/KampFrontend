@@ -1,0 +1,12 @@
+<ul class="list-group">
+  <li [class]="getAllCategoryClass()" routerLink="/products">Tüm Ürünler</li>
+  <!--  normalde class [class ] olunca componentdeki bir metoda kullanmak için mesela image [src]-->
+  <li (click)="setCurrentCategory(category)" <!-- tıklama haraketi click -->
+    routerLink = "/products/category/{{ category.categoryId }}" *ngFor="let
+    <!-- hangı routera(angulardan ) gidiyorum-->
+    category of categories" [class]="getCurrentCategoryClass(category)">
+    {{ category.categoryName }}
+  </li>
+</ul>
+
+<h5 *ngIf="currentCategory">{{ currentCategory.categoryName }} seçtiniz</h5>

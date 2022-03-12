@@ -1,0 +1,15 @@
+<div class="container">
+  <!--  container oluşturuyoruz (ortalamak için) -->
+  <app-navi></app-navi>
+  <div class="row">
+    <div class="col-md-3">
+      <!-- div bölüm row (satır) ile-- 12 eşit parça bootstrap de -->
+      <app-category></app-category>
+      <!-- 12 eşit parçadan 3 parçayı kategoriye(sol tarafa) ayırdık-->
+    </div>
+    <div class="col-md-9">
+      <!-- 12 eşit parçadan 9 parçayı xx(sağ tarafa) ayırdık-->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
